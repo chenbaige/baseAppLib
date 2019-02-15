@@ -1,28 +1,32 @@
 package com.example.cbg.demo.mvp.ui.activity;
 
 import android.app.Activity;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.widget.TextView;
 
 import com.example.cbg.demo.R;
 import com.example.cbg.demo.di.component.DaggerUserComponent;
-import com.example.cbg.demo.di.component.UserComponent;
 import com.example.cbg.demo.mvp.contract.UserContract;
 import com.example.cbg.demo.mvp.presenter.UserPresenter;
 import com.example.mylibrary.base.BaseActivity;
 import com.example.mylibrary.di.component.AppComponent;
+import com.example.mylibrary.utils.CommonUtils;
 import com.tbruyelle.rxpermissions2.RxPermissions;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class UserActivity extends BaseActivity<UserPresenter> implements UserContract.View {
 
-    private TextView mTv;
+    @BindView(R.id.tv_content)
+    TextView tvContent;
 
     @Override
     public void showUser(String user) {
-        mTv.setText(user);
+        tvContent.setText(user);
     }
 
     @Override
@@ -47,13 +51,17 @@ public class UserActivity extends BaseActivity<UserPresenter> implements UserCon
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
-        mTv = findViewById(R.id.tv_content);
         mPresenter.requestUsers(true);
 
     }
 
     @Override
     public void showMessage(@NonNull String message) {
-        mTv.setText(message);
+        tvContent.setText(message);
+    }
+
+    @OnClick(R.id.tv_content)
+    public void onViewClicked() {
+        CommonUtils.makeText(UserActivity.this,"hello");
     }
 }
