@@ -16,7 +16,6 @@ import com.example.mylibrary.utils.CommonUtils;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class UserActivity extends BaseActivity<UserPresenter> implements UserContract.View {
@@ -52,7 +51,7 @@ public class UserActivity extends BaseActivity<UserPresenter> implements UserCon
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
         mPresenter.requestUsers(true);
-        System.out.println("ceshigit");
+        System.out.println("ceshigit-v0");
     }
 
     @Override
