@@ -51,7 +51,6 @@ public class UserActivity extends BaseActivity<UserPresenter> implements UserCon
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
         mPresenter.requestUsers(true);
-        System.out.println("ceshigit-v0");
     }
 
     @Override
