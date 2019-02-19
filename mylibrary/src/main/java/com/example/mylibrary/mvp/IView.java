@@ -16,6 +16,7 @@
 package com.example.mylibrary.mvp;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 
@@ -75,4 +76,6 @@ public interface IView {
     default void killMyself() {
 
     }
+
+//    Context getActivity();
 }

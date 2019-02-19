@@ -15,6 +15,7 @@
  */
 package com.example.mylibrary.base;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -36,9 +37,11 @@ public abstract class DefaultAdapter<T> extends RecyclerView.Adapter<BaseHolder<
     protected List<T> mLists;
     protected OnRecyclerViewItemClickListener mOnItemClickListener = null;
     private BaseHolder<T> mHolder;
+    private Context mContext;
 
-    public DefaultAdapter(List<T> infos) {
+    public DefaultAdapter(Context context,List<T> infos) {
         super();
+        this.mContext = context;
         this.mLists = infos;
     }
 

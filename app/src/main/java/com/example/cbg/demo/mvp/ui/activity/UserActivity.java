@@ -10,6 +10,7 @@ import com.example.cbg.demo.R;
 import com.example.cbg.demo.di.component.DaggerUserComponent;
 import com.example.cbg.demo.mvp.contract.UserContract;
 import com.example.cbg.demo.mvp.presenter.UserPresenter;
+import com.example.cbg.demo.mvp.ui.fragment.RegisterFragment;
 import com.example.mylibrary.base.BaseActivity;
 import com.example.mylibrary.di.component.AppComponent;
 import com.example.mylibrary.utils.CommonUtils;
@@ -20,12 +21,9 @@ import butterknife.OnClick;
 
 public class UserActivity extends BaseActivity<UserPresenter> implements UserContract.View {
 
-    @BindView(R.id.tv_content)
-    TextView tvContent;
-
     @Override
     public void showUser(String user) {
-        tvContent.setText(user);
+
     }
 
     @Override
@@ -50,17 +48,13 @@ public class UserActivity extends BaseActivity<UserPresenter> implements UserCon
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
-        mPresenter.requestUsers(true);
-        System.out.println("ceshigit-v0");
+        if (findFragment(RegisterFragment.class) == null) {
+            loadRootFragment(R.id.fl_container, RegisterFragment.newInstance());  //load root Fragment
+        }
     }
 
     @Override
     public void showMessage(@NonNull String message) {
-        tvContent.setText(message);
     }
 
-    @OnClick(R.id.tv_content)
-    public void onViewClicked() {
-        CommonUtils.makeText(UserActivity.this,"hello");
-    }
 }

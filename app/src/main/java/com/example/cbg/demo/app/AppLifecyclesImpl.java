@@ -28,6 +28,7 @@ import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
 import butterknife.ButterKnife;
+import me.yokeyword.fragmentation.Fragmentation;
 import timber.log.Timber;
 
 /**
@@ -74,6 +75,13 @@ public class AppLifecyclesImpl implements AppLifecycles {
         CommonUtils.obtainAppComponentFromContext(application).extras()
                 .put(IntelligentCache.getKeyOfKeep(RefWatcher.class.getName())
                         , BuildConfig.USE_CANARY ? LeakCanary.install(application) : RefWatcher.DISABLED);
+
+        // Fragmentation is recommended to initialize in the Application
+        Fragmentation.builder()
+                // show stack view. Mode: BUBBLE, SHAKE, NONE
+                .stackViewMode(Fragmentation.BUBBLE)
+                .debug(BuildConfig.DEBUG)
+                .install();
     }
 
     @Override
