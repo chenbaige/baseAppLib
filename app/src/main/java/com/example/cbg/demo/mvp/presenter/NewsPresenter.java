@@ -46,6 +46,9 @@ public class NewsPresenter extends BasePresenter<NewsContract.Model, NewsContrac
             News news = new News();
             news.setTitle("老虎教练");
             news.setContent("沙里夫-奥尼尔因心脏问题在去年离开了NCAA赛场，在之后成功接受了心脏手术。贾巴尔握住沙里夫的手告诉他：“如果你需要帮助，给我发短信，跟我聊聊进攻，我很乐意帮助你。");
+//            if (i % 4 != 0)
+//                news.setUrl("http://pic.qiantucdn.com/58pic/25/76/51/586d0856aad83_1024.jpg");
+            news.setUrl("https://avatars0.githubusercontent.com/u/7");
             mDatas.add(news);
         }
 

@@ -1,44 +1,21 @@
 package com.example.cbg.demo.mvp.ui.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.widget.TextView;
 
 import com.example.cbg.demo.R;
-import com.example.cbg.demo.di.component.DaggerUserComponent;
-import com.example.cbg.demo.mvp.contract.UserContract;
-import com.example.cbg.demo.mvp.presenter.UserPresenter;
+import com.example.cbg.demo.mvp.mode.api.update.UpdateAppHttpUtil;
 import com.example.cbg.demo.mvp.ui.fragment.RegisterFragment;
 import com.example.mylibrary.base.BaseActivity;
 import com.example.mylibrary.di.component.AppComponent;
-import com.example.mylibrary.utils.CommonUtils;
-import com.tbruyelle.rxpermissions2.RxPermissions;
+import com.example.mylibrary.update.UpdateAppManager;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-
-public class UserActivity extends BaseActivity<UserPresenter> implements UserContract.View {
-
-    @Override
-    public void showUser(String user) {
-
-    }
-
-    @Override
-    public RxPermissions getRxPermissions() {
-        return null;
-    }
-
-    @Override
-    public Activity getActivity() {
-        return this;
-    }
+public class UserActivity extends BaseActivity {
 
     @Override
     public void setupActivityComponent(@NonNull AppComponent appComponent) {
-        DaggerUserComponent.builder().appComponent(appComponent).view(this).build().inject(this);
+//        DaggerUserComponent.builder().appComponent(appComponent).view(this).build().inject(this);
     }
 
     @Override
@@ -51,10 +28,18 @@ public class UserActivity extends BaseActivity<UserPresenter> implements UserCon
         if (findFragment(RegisterFragment.class) == null) {
             loadRootFragment(R.id.fl_container, RegisterFragment.newInstance());  //load root Fragment
         }
+        new UpdateAppManager
+                .Builder()
+                //当前Activity
+                .setActivity(this)
+                .setPost(false)
+                //更新地址
+                .setUpdateUrl("http://www.baidu.com")
+                //实现httpManager接口的对象
+                .setHttpManager(new UpdateAppHttpUtil())
+                .build()
+                .update();
     }
 
-    @Override
-    public void showMessage(@NonNull String message) {
-    }
 
 }

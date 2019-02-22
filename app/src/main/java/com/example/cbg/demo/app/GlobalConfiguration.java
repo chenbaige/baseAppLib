@@ -27,6 +27,7 @@ import com.example.mylibrary.base.AppLifecycles;
 import com.example.mylibrary.di.module.GlobalConfigModule;
 import com.example.mylibrary.imageloader.GlideImageLoaderStrategy;
 import com.example.mylibrary.itegretion.ConfigModule;
+import com.example.mylibrary.net.interceptor.requestInterceptor;
 import com.example.mylibrary.net.log.RequestInterceptor;
 
 import java.util.List;
@@ -137,6 +138,7 @@ public final class GlobalConfiguration implements ConfigModule {
 //                    retrofitBuilder.addConverterFactory(FastJsonConverterFactory.create());//比如使用 FastJson 替代 Gson
                 })
                 .okhttpConfiguration((context1, okhttpBuilder) -> {//这里可以自己自定义配置 Okhttp 的参数
+//                    okhttpBuilder.addInterceptor(new requestInterceptor());
 //                    okhttpBuilder.sslSocketFactory(); //支持 Https, 详情请百度
                     okhttpBuilder.writeTimeout(10, TimeUnit.SECONDS);
                     //使用一行代码监听 Retrofit／Okhttp 上传下载进度监听,以及 Glide 加载进度监听, 详细使用方法请查看 https://github.com/JessYanCoding/ProgressManager

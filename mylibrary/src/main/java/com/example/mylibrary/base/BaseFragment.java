@@ -15,6 +15,7 @@
  */
 package com.example.mylibrary.base;
 
+import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -56,6 +57,8 @@ public abstract class BaseFragment<P extends IPresenter> extends SupportFragment
     private final BehaviorSubject<FragmentEvent> mLifecycleSubject = BehaviorSubject.create();
     private Cache<String, Object> mCache;
     protected Context mContext;
+    @Inject
+    protected Application mAppContext;
     @Inject
     @Nullable
     protected P mPresenter;//如果当前页面逻辑简单, Presenter 可以为 null

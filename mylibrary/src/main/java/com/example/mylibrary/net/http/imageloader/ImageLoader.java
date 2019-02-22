@@ -18,8 +18,8 @@ package com.example.mylibrary.net.http.imageloader;
 import android.content.Context;
 import android.support.annotation.Nullable;
 
-
-import com.bumptech.glide.util.Preconditions;
+import com.example.mylibrary.imageloader.ImageConfigImpl;
+import com.example.mylibrary.utils.Preconditions;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -49,11 +49,11 @@ public final class ImageLoader {
     /**
      * 加载图片
      *
+     * @param <T>
      * @param context
      * @param config
-     * @param <T>
      */
-    public <T extends ImageConfig> void loadImage(Context context, T config) {
+    public <T extends ImageConfig> void loadImage(Context context, ImageConfigImpl config) {
         Preconditions.checkNotNull(mStrategy, "Please implement BaseImageLoaderStrategy and call GlobalConfigModule.Builder#imageLoaderStrategy(BaseImageLoaderStrategy) in the applyOptions method of ConfigModule");
         this.mStrategy.loadImage(context, config);
     }

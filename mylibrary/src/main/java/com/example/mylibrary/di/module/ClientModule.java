@@ -113,7 +113,6 @@ public abstract class ClientModule {
                 .connectTimeout(IConstant.HTTP_CONNECT_TIMEOUT, TimeUnit.SECONDS)
                 .readTimeout(IConstant.HTTP_CONNECT_TIMEOUT, TimeUnit.SECONDS)
                 .addNetworkInterceptor(intercept);
-//                .addInterceptor(new requestInterceptor());
 
         if (handler != null)
             builder.addInterceptor(new Interceptor() {

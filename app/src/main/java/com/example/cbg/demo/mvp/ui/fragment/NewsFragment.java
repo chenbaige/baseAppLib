@@ -17,7 +17,10 @@ import com.example.cbg.demo.mvp.contract.NewsContract;
 import com.example.cbg.demo.mvp.presenter.NewsPresenter;
 import com.example.mylibrary.base.BaseFragment;
 import com.example.mylibrary.di.component.AppComponent;
+import com.example.mylibrary.itegretion.EventBusManager;
 import com.example.mylibrary.utils.CommonUtils;
+
+import org.simple.eventbus.Subscriber;
 
 import javax.inject.Inject;
 
@@ -62,6 +65,8 @@ public class NewsFragment extends BaseFragment<NewsPresenter> implements NewsCon
     private void initRecyclerView() {
         swipeRefreshLayout.setOnRefreshListener(this);
         CommonUtils.configRecyclerView(recyclerView, mLayoutManager);
+
+        CommonUtils.makeText(mAppContext,"hello");
     }
 
 

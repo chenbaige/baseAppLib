@@ -17,6 +17,7 @@ package com.example.mylibrary.base;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.SparseArray;
 import android.view.View;
 
 import com.example.mylibrary.utils.ThirdViewUtil;

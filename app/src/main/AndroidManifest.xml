@@ -27,6 +27,7 @@
         <meta-data
             android:name="com.example.cbg.demo.app.GlobalConfiguration"
             android:value="ConfigModule" />
+
     </application>
 
 </manifest>

@@ -68,5 +68,7 @@ dependencies {
     testImplementation rootProject.ext.dependencies["canary-release"]
 
     implementation 'me.jessyan:arms-imageloader-glide:2.5.0'
+
+    implementation 'com.qianwen:okhttp-utils:3.8.0'
     implementation project(':mylibrary')
 }

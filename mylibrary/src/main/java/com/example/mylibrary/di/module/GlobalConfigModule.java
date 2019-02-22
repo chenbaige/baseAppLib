@@ -70,7 +70,6 @@ public class GlobalConfigModule {
     private List<Interceptor> mInterceptors;
     private ResponseErrorListener mErrorListener;
     private File mCacheFile;
-    private RequestInterceptor interceptor;
     private ClientModule.RetrofitConfiguration mRetrofitConfiguration;
     private ClientModule.OkhttpConfiguration mOkhttpConfiguration;
     private ClientModule.RxCacheConfiguration mRxCacheConfiguration;
@@ -96,8 +95,6 @@ public class GlobalConfigModule {
         this.mFormatPrinter = builder.formatPrinter;
         this.mCacheFactory = builder.cacheFactory;
         this.mExecutorService = builder.executorService;
-
-        this.interceptor = new RequestInterceptor();
     }
 
     public static Builder builder() {

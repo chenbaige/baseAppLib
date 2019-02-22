@@ -20,17 +20,25 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
+import com.example.cbg.demo.mvp.mode.api.service.UserService;
 import com.example.cbg.demo.mvp.mode.entity.User;
 import com.example.mylibrary.net.GlobalHttpHandler;
 import com.example.mylibrary.net.log.RequestInterceptor;
 import com.example.mylibrary.utils.CommonUtils;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.List;
 
+import me.jessyan.retrofiturlmanager.RetrofitUrlManager;
 import okhttp3.Interceptor;
+import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
+import okio.Buffer;
+import okio.BufferedSource;
 import timber.log.Timber;
 
 /**
@@ -44,6 +52,8 @@ import timber.log.Timber;
  */
 public class GlobalHttpHandlerImpl implements GlobalHttpHandler {
     private Context context;
+
+    private static final Charset UTF8 = Charset.forName("UTF-8");
 
     public GlobalHttpHandlerImpl(Context context) {
         this.context = context;
@@ -60,18 +70,7 @@ public class GlobalHttpHandlerImpl implements GlobalHttpHandler {
      */
     @NonNull
     @Override
-    public Response onHttpResultResponse(@Nullable String httpResult, @NonNull Interceptor.Chain chain, @NonNull Response response) {
-        if (!TextUtils.isEmpty(httpResult) && RequestInterceptor.isJson(response.body().contentType())) {
-            try {
-                List<User> list = CommonUtils.obtainAppComponentFromContext(context).gson().fromJson(httpResult, new TypeToken<List<User>>() {
-                }.getType());
-                User user = list.get(0);
-//                Timber.w("Result ------> " + user.getLogin() + "    ||   Avatar_url------> " + user.getAvatarUrl());
-            } catch (Exception e) {
-                e.printStackTrace();
-                return response;
-            }
-        }
+    public Response onHttpResultResponse(@Nullable String httpResult, @NonNull Interceptor.Chain chain, @NonNull Response response) throws IOException {
 
         /* 这里如果发现 token 过期, 可以先请求最新的 token, 然后在拿新的 token 放入 Request 里去重新请求
         注意在这个回调之前已经调用过 proceed(), 所以这里必须自己去建立网络请求, 如使用 Okhttp 使用新的 Request 去请求
@@ -84,6 +83,42 @@ public class GlobalHttpHandlerImpl implements GlobalHttpHandler {
         response.body().close();
         如果使用 Okhttp 将新的请求, 请求成功后, 再将 Okhttp 返回的 Response return 出去即可
         如果不需要返回新的结果, 则直接把参数 response 返回出去即可*/
+
+//        注意在这个回调之前已经调用过 proceed(), 所以这里必须自己去建立网络请求, 如使用 Okhttp 使用新的 Request 去请求  httpResult是请求接口返回的结果
+        Timber.w("body---------->" + httpResult);
+
+        /***************************************/
+
+        //在这里判断是否token过期 过期后重新获取token 并且 重发请求
+        if (false) {//根据和服务端的约定判断token过期
+
+            //请求获取token的api
+
+
+            //取出本地的refreshToken
+            String refreshToken = "sssgr122222222";
+
+            // 通过一个特定的接口获取新的token，此处要用到同步的retrofit请求
+//            ApiService service = ServiceManager.getService(ApiService.class);
+//            CommonUtils.obtainAppComponentFromContext(context).repositoryManager().obtainRetrofitService(UserService.class).getUsers();
+//            Call<String> call = service.refreshToken(refreshToken);
+//
+//            //要用retrofit的同步方式
+            String newToken = "";
+//            String newToken = call.execute().body();
+
+
+            // create a new request and modify it accordingly using the new token
+            Request newRequest = chain.request().newBuilder().header("token", newToken)
+                    .build();
+
+            // retry the request
+
+            response.body().close();
+            return chain.proceed(newRequest);
+        }
+
+        // otherwise just pass the original response on
         return response;
     }
 

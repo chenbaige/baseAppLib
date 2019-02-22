@@ -18,6 +18,7 @@ package com.example.cbg.demo.di.component;
 import com.example.cbg.demo.mvp.contract.UserContract;
 import com.example.cbg.demo.mvp.ui.activity.UserActivity;
 import com.example.cbg.demo.di.module.UserModule;
+import com.example.cbg.demo.mvp.ui.fragment.RegisterFragment;
 import com.example.mylibrary.di.ActivityScope;
 import com.example.mylibrary.di.component.AppComponent;
 
@@ -38,7 +39,7 @@ import dagger.Component;
 @ActivityScope
 @Component(modules = UserModule.class, dependencies = AppComponent.class)
 public interface UserComponent {
-    void inject(UserActivity activity);
+    void inject(RegisterFragment fragment);
     @Component.Builder
     interface Builder {
         @BindsInstance

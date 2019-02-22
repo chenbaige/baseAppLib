@@ -31,6 +31,8 @@ import com.example.mylibrary.di.module.GlobalConfigModule;
 import com.example.mylibrary.itegretion.ConfigModule;
 import com.example.mylibrary.itegretion.ManifestParser;
 import com.example.mylibrary.itegretion.cache.IntelligentCache;
+import com.example.mylibrary.net.interceptor.requestInterceptor;
+import com.example.mylibrary.net.log.RequestInterceptor;
 import com.example.mylibrary.utils.Preconditions;
 
 import java.util.ArrayList;
